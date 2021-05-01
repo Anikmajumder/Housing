@@ -9,6 +9,7 @@ export interface Ipropertybase {
   BuiltArea: number;
   City: string;
   RTM: number;
+  CarpetArea?: number;
   Image?: string;
 
 }
