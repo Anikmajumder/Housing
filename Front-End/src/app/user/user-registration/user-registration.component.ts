@@ -32,20 +32,20 @@ export class UserRegistrationComponent implements OnInit {
   }
 
 
- createRegisterationForm(){
-  this.registerationForm = this.fromBuilder.group({
-    userName: [null,Validators.required],
-    email:[null,[Validators.required,Validators.email]],
-    password:[null,[Validators.required,Validators.minLength(8)]],
-    confirmPassword:[null,Validators.required],
-    mobile:[null,[Validators.required,Validators.maxLength(10)]]
-  },this.passwrodMatchingValidator)
+  createRegisterationForm() {
+    this.registerationForm =  this.fromBuilder.group({
+        userName: [null, Validators.required],
+        email: [null, [Validators.required, Validators.email]],
+        password: [null, [Validators.required, Validators.minLength(8)]],
+        confirmPassword: [null, Validators.required],
+        mobile: [null, [Validators.required, Validators.maxLength(11)]]
+    }, {validators: this.passwordMatchingValidatior});
 }
 
-  passwrodMatchingValidator(fg:FormGroup): Validators{
-    return fg.get('password').value === fg.get('confirmPassword').value? null:
-    {notmatched: true};
-  }
+passwordMatchingValidatior(fg: FormGroup): Validators {
+    return fg.get('password').value === fg.get('confirmPassword').value ? null :
+        {notmatched: true};
+}
 
 
   get userName(){

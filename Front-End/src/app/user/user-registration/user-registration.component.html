@@ -46,7 +46,7 @@
         <div class="form-group col-12">
           <label for="cpassword" class="form-label">Confirm Password</label>
           <input type="password" class="form-control" formControlName="confirmPassword">
-          <span  *ngIf="!confirmPassword.valid && (confirmPassword.touched || userSubmitted)" class="error-block">
+          <span  *ngIf="!confirmPassword.valid && confirmPassword.touched">
             <span *ngIf="confirmPassword.hasError('required')">
               Please confirm password
             </span>
