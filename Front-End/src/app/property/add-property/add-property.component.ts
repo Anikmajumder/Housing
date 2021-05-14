@@ -23,6 +23,8 @@ property = new Property();
 
 propertyType: Array<string>=['House','Apartment','Duplex']
 furnishType: Array<string>=['Fully','Semi','Unfurnished']
+cityList: any[];
+
 
 propertyView: Ipropertybase={
   Id: null,
@@ -33,7 +35,7 @@ propertyView: Ipropertybase={
   BHK: null,
   Price: null,
   BuiltArea: null,
-  City: null,
+  City: '',
   RTM: null
 
 };
@@ -43,6 +45,9 @@ constructor(private fb: FormBuilder, private router:Router,private housingServic
 
   ngOnInit(): void {
     this.CreateAddPropertyForm();
+    this.housingService.getAllCities().subscribe(data=>{
+      this.cityList=data;
+    })
   }
 
   CreateAddPropertyForm() {
