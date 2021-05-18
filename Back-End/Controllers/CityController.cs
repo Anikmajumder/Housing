@@ -73,10 +73,17 @@ namespace Back_End.Controllers
         [HttpPut("update/{id}")]
         public async Task<IActionResult> UpdateCity(int id, CityDto cityDto)
         {
+           if(id!=cityDto.Id){
+                return BadRequest("Update not allowed");
+            }
             var cityFromDb = await unitOfWork.CityRepository.FindCity(id);
+            if(cityFromDb == null){
+                return BadRequest("Update not allowed");
+            }
             cityFromDb.LastUpdatedBy = DateTime.Today;
             cityFromDb.LastUpdatedOn= DateTime.Now;
             mapper.Map(cityDto, cityFromDb);
+            throw new Exception("SOme unknown error occured");
             await unitOfWork.SaveAsync();
             return StatusCode(200);
         }
@@ -84,7 +91,9 @@ namespace Back_End.Controllers
         [HttpPut("updateCityName/{id}")]
         public async Task<IActionResult> UpdateCity(int id, CityUpdateDto cityDto)
         {
+            
             var cityFromDb = await unitOfWork.CityRepository.FindCity(id);
+
             cityFromDb.LastUpdatedBy = DateTime.Today;
             cityFromDb.LastUpdatedOn= DateTime.Now;
             mapper.Map(cityDto, cityFromDb);
