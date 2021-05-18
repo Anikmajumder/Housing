@@ -30,6 +30,7 @@ namespace Back_End.Controllers
         [HttpGet]
         public async Task<IActionResult> GetCities()
         {
+            throw new UnauthorizedAccessException();
             var cities = await unitOfWork.CityRepository.GetCities();
             var citiesDto = mapper.Map<IEnumerable<CityDto>>(cities);
             // var citiesDto = from c in cities
