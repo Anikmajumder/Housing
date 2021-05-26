@@ -11,13 +11,13 @@ using Back_End.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.JsonPatch;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace Back_End.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CityController : ControllerBase
+    [Authorize]
+    
+    public class CityController : BaseController
     {
         
         private readonly IUnitOfWork unitOfWork;
@@ -28,9 +28,10 @@ namespace Back_End.Controllers
             this.mapper = mapper;
         }
         [HttpGet]
+        //[AllowAnonymous]
         public async Task<IActionResult> GetCities()
         {
-            throw new UnauthorizedAccessException();
+           
             var cities = await unitOfWork.CityRepository.GetCities();
             var citiesDto = mapper.Map<IEnumerable<CityDto>>(cities);
             // var citiesDto = from c in cities

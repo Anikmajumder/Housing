@@ -15,6 +15,8 @@ namespace Back_End.Data
         }
         public ICityRepository CityRepository => new CityRepository(dc);
 
+        public IUserRepository UserRepository => new UserRepository(dc);
+
         public async Task<bool> SaveAsync()
         {
             return await dc.SaveChangesAsync()>0;
